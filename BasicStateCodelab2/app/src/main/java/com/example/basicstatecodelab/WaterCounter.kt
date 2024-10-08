@@ -20,12 +20,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 @Composable
 fun StatelessCounter(count: Int, onIncrement: () -> Unit, modifier: Modifier = Modifier) {
     Column(modifier = modifier.padding(16.dp)) {
-        var waterCount by remember { mutableStateOf(0) }
-
-        var juiceCount by remember { mutableStateOf(0) }
-
-        StatelessCounter(waterCount, { waterCount++ })
-        StatelessCounter(juiceCount, { juiceCount++ })
         if (count > 0) {
             Text("You've had $count glasses.")
         }
@@ -33,4 +27,9 @@ fun StatelessCounter(count: Int, onIncrement: () -> Unit, modifier: Modifier = M
             Text("Add one")
         }
     }
+}
+@Composable
+fun StatefulCounter(modifier: Modifier = Modifier) {
+    var count by rememberSaveable { mutableStateOf(0) }
+    StatelessCounter(count, { count++ }, modifier)
 }
